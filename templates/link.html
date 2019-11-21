@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}联系我们 - 新材数科有限公司{% endblock %}
+{% block breadcrumb %}
+<span class="layui-breadcrumb" lay-separator=">">
+  <a href="{% url 'index' %}">首页</a>
+  <a href="{% url 'link' %}" style="color: #00a971 !important;">联系我们</a>
+</span>
+{% endblock %}
+
+{% block content %}
+<section id="index-body">
+    <!-- START 解决方案  -->
+    <div class="layui-row link-row">
+        <div class="layui-col-xs6 layui-col-md12">
+            <div class="link-image">
+                <!--                <img src="{% static 'images/112-600x200.jpg' %}" />-->
+            </div>
+            <div class="link-body">
+                <!--                公司联系信息-->
+                <div class="link-info">
+                    <p class="com-name">新材数科有限公司 - 先进专业的原材料加工方案提供商</p>
+                    <ul>
+                        <li class="com-info-left">
+                            {% for info in cominfo %}
+                            <p class="com-adr">{{ info.address }}<span></span></p>
+                            <p class="com-tel">电话：{{ info.phone }}</p>
+                            <p class="com-fax">传真：{{ info.fax }}</p>
+                            <p class="com-em">邮箱：{{ info.email }}</p>
+                            {% endfor %}
+                        </li>
+                        <li class="com-info-right">
+                            {% for info in cominfo %}
+                            <p class="com-cont">
+                                <img src="{{ MEDIA_URL }}{{ info.wxqrcode }}"/>
+                                <span>加微信</span>
+                            </p>
+                            <p class="com-cont">
+                                <img src="{{ MEDIA_URL }}{{ info.qywxqrcode }}"/>
+                                <span>加企业微信</span>
+                            </p>
+                            <p class="com-cont">
+                                <img src="{{ MEDIA_URL }}{{ info.qqqrcode }}"/>
+                                <span>加QQ</span>
+                            </p>
+                            {% endfor %}
+                        </li>
+                    </ul>
+                </div>
+                <!--                咨询表单-->
+                <div class="link-form">
+                    <form class="layui-form" method="post" action="{% url 'link' %}" autocomplete="off">
+                        <!--                        # 公司名称-->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label required"> 公司名称</label>
+                            <div class="layui-input-block">
+                                <!--                                <label class="layui-form-label required"> 公司名称-->
+                                <input type="text" name="company" value="" lay-verify="required|company"
+                                       autocomplete="off"
+                                       placeholder="请输入贵司名称（至少5个字符）" class="layui-input link-com-name">
+                                <!--                                    </label>-->
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">姓名</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="linker" lay-verify="" autocomplete="off"
+                                           placeholder="联系人姓名（选填）" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label link-pad-left required">手机</label>
+                                <div class="layui-input-inline">
+                                    <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off"
+                                           class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label link-pad-left required">邮箱</label>
+                                <div class="layui-input-inline {% if message_form.errors.email %}errorput{% endif %}">
+                                    <input type="text" name="email" lay-verify="required|email" autocomplete="off"
+                                           class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label required">所在省市</label>
+                            <div id="cat_ids1"></div>
+                        </div>
+                        <div class="layui-form-item" pane="">
+                            <label class="layui-form-label required">所需产品</label>
+                            <div class="layui-input-block">
+                                <input type="checkbox" name="product" lay-filter="choiceOne" lay-skin="primary"
+                                       title="产品1" value="产品1">
+                                <input type="checkbox" name="product" lay-filter="choiceOne" lay-skin="primary"
+                                       title="产品2" value="产品2">
+                                <input type="checkbox" name="product" lay-filter="choiceOne" lay-skin="primary"
+                                       title="产品3" value="产品3">
+                            </div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">需求说明</label>
+                            <div class="layui-input-block">
+                                <textarea placeholder="请简要说明您的需求" class="layui-textarea link-msg"></textarea>
+                            </div>
+                        </div>
+
+                        <!--  # 验证码-->
+                        <div class="layui-form-item captcha1">
+                            <label class="layui-form-label required">验证码</label>
+                            <div class="layui-input-block">
+                                <!--                                {{ message_form.captcha }}-->
+                                <img class="captcha" src="{{ captcha.image_url }}" alt="点击切换" id="id_captcha">
+                                <input type="text" name="captcha" value="" lay-verify="required|captcha"
+                                       autocomplete="off" placeholder="验证码" id="capt" class="layui-input"> <br>
+                                <input value="{{ captcha.hashkey }}" name="hashkey" type="hidden" id="id_captcha_0">
+                            </div>
+                            {% for key,error in message_form.errors.items %}{{ error }}{% endfor %}
+                            {{ message_form.errors.city }}
+                        </div>
+
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button type="submit" class="layui-btn" lay-submit=""
+                                        lay-filter="link">立即提交
+                                </button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </div>
+                        {% csrf_token %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END 解决方案  -->
+</section>
+{% endblock %}
+
+{% block custom_js %}
+<script src="{% static 'js/sha1.js' %}"></script>
+<script src="{% static 'layui/use-layui.js' %}"></script>
+<script src="{% static 'layui/city.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript">
+    //验证码动态刷新实现
+    $('.captcha').click(function () {
+        $.getJSON("/captcha/refresh/", function (result) {
+            $('#id_captcha').attr('src', result['image_url']);
+            $('#id_captcha_0').val(result['key'])
+        });
+    });
+    $('.layui-btn').click(function () {
+            sha1('fxlv');
+    var hash = sha1.create();
+    hash.update('Message to hash');
+    hash.hex();
+    console.log(hash)
+        var hs = hex_sha1($('#capt').val());
+        console.log(hs);
+    });
+
+
+</script>
+{% endblock %}

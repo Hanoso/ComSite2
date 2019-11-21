@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}新闻动态 - 新材数科有限公司{% endblock %}
+{% block breadcrumb %}
+<span class="layui-breadcrumb" lay-separator=">">
+  <a href="{% url 'index' %}">首页</a>
+  <a href="{% url 'newslist' %}">新闻动态</a>
+    <a href="?ct={% if article_category == '' %}{% else %}{{ article_category }}{% endif %}"
+       style="color: #00a971 !important;">
+        {% if article_category == '' %}
+        全部
+        {% elif article_category == 'gg' %}
+        公司公告
+        {% elif article_category == 'xw' %}
+        行业新闻
+        {% endif %}
+    </a>
+</span>
+{% endblock %}
+
+{% block content %}
+<section id="index-body">
+    <!-- START 新闻动态  -->
+    <div class="layui-row about-row">
+        <div class="layui-col-xs6 layui-col-md12">
+            <div class="about-image">
+                <!--                <img src="{% static 'images/112-600x200.jpg' %}" />-->
+            </div>
+        </div>
+        <div class="layui-col-xs6 layui-col-md12 float-none">
+            <!-- START 新闻列表  -->
+            <div class="layui-row service-row">
+                <div class="layui-col-xs6 layui-col-md12 float-none">
+                    <div class="subnav-type">
+                        <ul class="subnav-type-ul">
+                            <li>
+                                <a href="?ct=" title="全部" target="_self"
+                                   class="link {% ifequal article_category '' %}active2{% endifequal %}">全部</a>
+                            </li>
+                            <li>
+                                <a href="?ct=gg" title="公司公告" target="_self"
+                                   class="link {% ifequal article_category 'gg' %}active2{% endifequal %}">公司公告</a>
+                            </li>
+                            <li>
+                                <a href="?ct=xw" title="行业新闻" target="_self"
+                                   class="link {% ifequal article_category 'xw' %}active2{% endifequal %}">行业新闻</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="layui-col-xs6 layui-col-md12">
+                    <div class="news-container">
+                        <!--新闻列表-->
+                        <ul class="news-ul">
+                            {% for article in articles.object_list %}
+                            <li>
+                                <div class="layui-row layui-col-space10">
+                                    <div class="layui-col-md3">
+                                        <div class="news-cover">
+                                            <img src="{{ MEDIA_URL }}{{ article.picture }}"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md9">
+                                        <div class="news-outline">
+                                            <h2 class="h-auto"><a class="book" href="{% url 'news' article.id %}" title="材料加工">
+                                                {{ article.title }}
+                                            </a></h2>
+                                            <p class="news-abstract">{{ article.abstract }} </p>
+                                            <a class="news-more pull-xs-right" href="{% url 'news' article.id %}"
+                                               title="了解更多">了解更多</a>
+                                            <p class="pub-date">
+                                                <span>{{ article.add_time|date:'Y-m-d'|slice:'5:' }}</span>
+                                                <span>/</span>
+                                                <span>{{ article.add_time|date:'Y-m-d'|slice:'4' }}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <!-- 分页-->
+                        <div id="normal-page">
+                            <ul>
+                                {% if articles.has_previous %}
+                                <li class="long"><a href="?{{ articles.previous_page_number.querystring }}">上一页</a>
+                                </li>
+                                {% endif %}
+                                {% for page in articles.pages %}
+                                {% if page %}
+                                {% ifequal page articles.number %}
+                                <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+                                {% else %}
+                                <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                {% endifequal %}
+                                {% else %}
+                                <li class="none"><a href="">...</a></li>
+                                {% endif %}
+                                {% endfor %}
+                                {% if articles.has_next %}
+                                <li class="long"><a href="?{{ articles.next_page_number.querystring }}">下一页</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END 新闻列表  -->
+        </div>
+    </div>
+    <!-- END 新闻动态  -->
+</section>
+{% endblock %}
+
+{% block custom_js %}
+<script src="{% static 'layui/use-layui.js' %}"></script>
+{% endblock %}

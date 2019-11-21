@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} 新材数科 {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'layui/css/layui.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/layui-style.css' %}">
+    {% block custom_css %}{% endblock %}
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<!-- 头部 START 导航块 -->
+<section>
+    <div class="layui-row">
+        <div class="layui-col-xs12 layui-col-md12 bg-color-nav border-top-nav p-t12-r0">
+            <div class="header-nav">
+                <ul class="layui-nav">
+                    <li class="layui-nav-item {% if request.path == '/' %}layui-this{% endif %} "><a href="{% url 'index' %}">首页</a></li>
+                    <li class="layui-nav-item {% if request.path|slice:'6' == '/about' %}layui-this{% endif %}">
+                        <a href="{% url 'about' %}">关于我们</a>
+                    </li>
+                    <li class="layui-nav-item {% if request.path|slice:'12' == '/productlist' %}layui-this{% endif %}">
+                        <a href="{% url 'productlist' %}">产品展示</a>
+                    </li>
+                    <li class="layui-nav-item {% if request.path|slice:'8' == '/service' %}layui-this{% endif %}"><a href="{% url 'service' %}">服务支持</a></li>
+                    <li class="layui-nav-item {% if request.path|slice:'9' == '/newslist' %}layui-this{% endif %}"><a href="{% url 'newslist' %}">新闻动态</a></li>
+                    <li class="layui-nav-item {% if request.path|slice:'5' == '/link' %}layui-this{% endif %}"><a href="{% url 'link' %}">联系我们</a></li>
+                    <li class="layui-nav-item"><a href="#">English</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="layui-col-xs12 layui-col-md12">
+            <div class="header-breadcrumb">
+                {% block breadcrumb %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 头部 END 导航块 -->
+
+<!-- 头部 - 导航块 -->
+{% block custom_bread %}
+{% endblock %}
+<hr class="layui-bg-gray">
+
+<!-- 主题内容块 -->
+{% block content %}
+{% endblock %}
+
+<hr class="layui-bg-gray">
+<!-- START footer -->
+<section>
+    <footer>
+        <div class="layui-row footer-row bg-color-nav">
+            <div class="layui-col-xs6 layui-col-md12">
+                <div class="footer-content">
+                <span class="layui-breadcrumb left-bread" lay-separator="|">
+                  <a href="#">合作伙伴</a>
+                  <a href="{% url 'link' %}">联系我们</a>
+                  <a href="#">人才招聘</a>
+                </span>
+                    <span>
+                        {% block footer_comname %}{% endblock %}
+                    </span>
+                    <span class="layui-breadcrumb right-bread" lay-separator="|">
+                  <a href="">京公网安备 11010802024810号</a>
+                  <a href="">苏ICP备17055517号</a>
+                </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</section>
+<!-- END footer -->
+
+<script src="{% static 'layui/layui.js' %}"></script>
+<!--导航菜单效果-->
+<script>
+    layui.use('element', function () {
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+        //监听导航点击
+        element.on('nav(demo)', function (elem) {
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+</script>
+{% block custom_js %}{% endblock %}
+</body>
+</html>

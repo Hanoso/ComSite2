@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}关于我们 - 新材数科有限公司{% endblock %}
+{% block breadcrumb %}
+<span class="layui-breadcrumb" lay-separator=">">
+  <a href="{% url 'index' %}">首页</a>
+  <a href="{% url 'about' %}" id="add_bread">关于我们</a>
+    <a href="" class="" id="introtohis">公司介绍</a>
+</span>
+{% endblock %}
+
+{% block content %}
+<section id="index-body">
+    <!-- START 解决方案  -->
+    <div class="layui-row about-row">
+        <div class="layui-col-xs6 layui-col-md12 float-none">
+            <div class="about-image">
+                <!--                <img src="{% static 'images/112-600x200.jpg' %}" />-->
+            </div>
+        </div>
+        <div class="layui-col-xs6 layui-col-md12 float-none">
+            <div class="layui-tab about-tab" lay-filter="about">
+                <ul class="layui-tab-title about-left-sidebar">
+                    <li class="layui-this" lay-id="intro" id="intro">公司介绍</li>
+                    <li lay-id="history" id="history">发展历程</li>
+                </ul>
+                <div class="layui-tab-content about-main">
+                    <!--                    公司介绍tab-->
+                    <div class="layui-tab-item layui-show">
+                        {% autoescape off %}
+                        {{ intro.content }}
+                        {% endautoescape %}
+                    </div>
+                    <!--                    发展历程tab-->
+                    <div class="layui-tab-item">
+                        <ul class="layui-timeline">
+                            {% for h in history%}
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-timeline-axis"></i>
+                                <div class="layui-timeline-content layui-text">
+                                    <h3 class="layui-timeline-title">{{h.add_time|date:'Y-m-d'}}</h3>
+                                    {% autoescape off %}
+                                    {{h.desc}}
+                                    {% endautoescape %}
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END 解决方案  -->
+</section>
+{% endblock %}
+
+{% block custom_js %}
+<script src="{% static 'layui/use-layui.js' %}"></script>
+<script type="text/javascript">
+    $("#history").click(function () {
+        $("#introtohis").html("发展历程");
+    });
+    $("#intro").click(function () {
+        $("#introtohis").html("公司介绍");
+    });
+</script>
+{% endblock %}

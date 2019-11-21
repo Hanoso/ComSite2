@@ -1,0 +1,181 @@
+body {
+    overflow: auto;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    color: #202020;
+}
+
+#row-01, #row02, #row-03 {
+    margin-bottom: 50px;
+}
+
+/*header*/
+#header {
+    width: 100%;
+    height: 105px;
+    background: url(http://www.haierbiomedical.com/medical/images/header_bg.png) left top repeat-x;
+    position: relative;
+    z-index: 90;
+}
+
+#header .lev2_div {
+	background:url(http://www.haierbiomedical.com/medical/images/top_menu_bg.png) 0 0 repeat-x;
+	width:100%;
+	position:absolute;
+	top:99px;
+	left:0;
+	height:40px;
+	display:none;
+}
+
+#header .hd_inner {
+    width: 980px;
+    margin: 0 auto;
+    position: relative;
+}
+
+#header .hd_inner .logo {
+    position: absolute;
+    top: 37px;
+    left: 0px;
+}
+
+#header .hd_inner .m_nav {
+    position: absolute;
+    top: 39px;
+    left: 356px;
+    /*background-color: blue;*/
+}
+
+#header .hd_inner .m_nav .level_1 {
+    background: url(http://www.haierbiomedical.com/medical/images/m_nav_li_bg.png) right top no-repeat;
+    padding-left: 2px;
+    height: 40px;
+    zoom: 1;
+    position: relative;
+}
+
+#header .hd_inner .m_nav .level_1 .nav_1 {
+    width: 75px;
+}
+
+#header .hd_inner .m_nav .level_1 .nav_2 {
+    width: 98px;
+}
+
+#header .hd_inner .m_nav .level_1 .nav_3 {
+    width: 96px;
+}
+
+#header .hd_inner .m_nav .level_1 .nav_4 {
+    width: 155px;
+}
+
+#header .hd_inner .m_nav .level_1 .nav_5 {
+    width: 76px;
+}
+
+#header .hd_inner .m_nav .level_1 .nav_6 {
+    width: 110px;
+}
+
+#header .hd_inner .m_nav ul.level_2 {
+    width: 100%;
+    display: none;
+    height: 40px;
+    position: absolute;
+    left: 0px;
+    top: 60px;
+    overflow: hidden;
+    zoom: 1;
+    z-index: 99;
+}
+
+#header .hd_inner .m_nav .level_1 .lev_1 .z-link {
+    width: 100%;
+    display: inline-block;
+}
+
+#header .hd_inner .m_nav .level_1 li a {
+    display: inline-block;
+    /* padding-left:20px; */
+    /* padding-right:20px; */
+    text-align: center;
+    line-height: 43px;
+    height: 64px;
+    font-size: 14px;
+}
+
+#header .hd_inner .m_nav ul li a {
+    color: #303030;
+}
+
+#header .hd_inner .m_nav ul .lev_1 .z-link:hover, #header .hd_inner .m_nav ul .lev_1.active .z-link, #header .hd_inner .m_nav ul .lev_1 .z-link:hover, #header .hd_inner .m_nav ul .lev_1 span {
+    color: #005AAA;
+    background: url(http://www.haierbiomedical.com/medical/images/m_nav_lev1_a_bg.png) center bottom no-repeat;
+    width: 100%;
+}
+
+#header .hd_inner .m_nav .level_1 .lev_1 {
+    background: url(http://www.haierbiomedical.com/medical/images/m_nav_li_bg.png) 0 0 no-repeat;
+    padding-right: 2px;
+    float: left;
+    display: inline;
+}
+
+.content {
+    height: 200px;
+    border: 1px solid blue;
+}
+
+/* footer */
+#footer {
+    width: 100%;
+    background: #fe7902;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+#footer .inner {
+    width: 980px;
+    margin: 0 auto;
+    position: relative;
+    height: 20px;
+}
+
+#footer .inner .ft_link {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 50%;
+    height: 20px;
+}
+
+#footer .inner .ft_link a {
+    color: #303030;
+    padding-right: 11px;
+    margin-right: 10px;
+    background: url(http://www.haierbiomedical.com/medical/images/line_dot_v_w1.png) right center no-repeat;
+}
+
+#footer .inner .ft_link a.last {
+    background: none;
+    padding-right: 0;
+    margin-right: 0px;
+}
+
+#footer .inner .ft_link a:hover {
+    color: #005aaa;
+}
+
+#footer .inner .copyright {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 50%;
+    text-align: right;
+    height: 20px;
+}

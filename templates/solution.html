@@ -1,0 +1,252 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ solution.name }} - 新材数科有限公司{% endblock %}
+
+{% block custom_css %}{% endblock %}
+{% block breadcrumb %}
+<span class="layui-breadcrumb" lay-separator=">">
+  <a href="{% url 'index' %}">首页</a>
+  <a href="{% url 'index' %}">解决方案</a>
+    <a href="{% url 'solution' solution.id %}" style="color: #00a971 !important;">{{ solution.name }} </a>
+</span>
+{% endblock %}
+
+
+{% block content %}
+<section id="index-body">
+    <!-- START 解决方案  -->
+    <div class="layui-row solution-row">
+        <div class="layui-col-xs6 layui-col-md12">
+            <section class="solution-intro">
+                <div class="solution-intro-content">
+                    <h2>{{ solution.name }}</h2>
+                    <div class="solution-detail">
+                        {% autoescape off %}
+                        {{ solution.detail }}
+                        {% endautoescape %}
+                    </div>
+                </div>
+            </section>
+            <section class="solution-related-product">
+                <h2>相关产品</h2>
+                <div>
+                    <ul>
+                        <li>
+                            <div class="product-flow">
+                                <div class="product-list {% if count > 4 %}max-h{% else %} auto-h{% endif %}">
+                                    <div class="flow-default {% if count > 4 %}p-absolute {% else %}p-relative{% endif %}" id="LAY_product">
+                                        {% for product in all_products %}
+                                        <div class="hover-shadow-box-animation product-hover">
+                                            <a href="{% url 'product' product.id %}"><img lay-src="{{ MEDIA_URL }}{{ product.picture }}"></a>
+                                            <div class="product-index-container">
+                                                <a href="{% url 'product'  product.id %}">{{ product.name }}</a>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div>
+
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section class="solution-applications">
+                <h2>相关案例</h2>
+                <!-- 左右滚动部分 begin -->
+                <div class="content-wrap">
+                    <span class="to-left">
+                        <i class="layui-icon layui-icon-left" style="font-size: 30px; color: #1E9FFF;"></i>
+                    </span>
+                    <div class="tab-wrap">
+                        <ul class="tab-list">
+                            <li>
+                                <div class="solution-tab-item">
+                                    <img src="{% static 'images/2222.jpg' %}"/>
+                                    <div class="">
+                                        应用企业/单位
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="solution-tab-item">
+                                    <img src="{% static 'images/2222.jpg' %}"/>
+                                    <div class="">
+                                        应用企业/单位
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="solution-tab-item">
+                                    <img src="{% static 'images/2222.jpg' %}"/>
+                                    <div class="">
+                                        应用企业/单位
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="solution-tab-item">
+                                    <img src="{% static 'images/2222.jpg' %}"/>
+                                    <div class="">
+                                        应用企业/单位
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="solution-tab-item">
+                                    <img src="{% static 'images/2222.jpg' %}"/>
+                                    <div class="">
+                                        应用企业/单位
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="solution-tab-item">
+                                    <img src="{% static 'images/2222.jpg' %}"/>
+                                    <div class="">
+                                        应用企业/单位
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="solution-tab-item">
+                                    <img src="{% static 'images/2222.jpg' %}"/>
+                                    <div class="">
+                                        应用企业/单位
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="solution-tab-item">
+                                    <img src="{% static 'images/2222.jpg' %}"/>
+                                    <div class="">
+                                        应用企业/单位
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="solution-tab-item">
+                                    <img src="{% static 'images/2222.jpg' %}"/>
+                                    <div class="">
+                                        应用企业/单位
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="solution-tab-item">
+                                    <img src="{% static 'images/2222.jpg' %}"/>
+                                    <div class="">
+                                        应用企业/单位
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="solution-tab-item">
+                                    <img src="{% static 'images/2222.jpg' %}"/>
+                                    <div class="">
+                                        应用企业/单位
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="solution-tab-item">
+                                    <img src="{% static 'images/2222.jpg' %}"/>
+                                    <div class="">
+                                        应用企业/单位
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="solution-tab-item">
+                                    <img src="{% static 'images/2222.jpg' %}"/>
+                                    <div class="">
+                                        应用企业/单位
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="solution-tab-item">
+                                    <img src="{% static 'images/2222.jpg' %}"/>
+                                    <div class="">
+                                        应用企业/单位
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="solution-tab-item">
+                                    <img src="{% static 'images/2222.jpg' %}"/>
+                                    <div class="">
+                                        应用企业/单位
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="solution-tab-item">
+                                    <img src="{% static 'images/2222.jpg' %}"/>
+                                    <div class="">
+                                        应用企业/单位
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <span class="to-right">
+                        <i class="layui-icon layui-icon-right" style="font-size: 30px; color: #1E9FFF;"></i>
+                    </span>
+                </div>
+                <!-- 左右滚动部分 end -->
+                <script>
+                    var handleNum = 0; // 点击次数
+                    var widthArr = []; // 存放当前每一个tab宽度
+                    var elChildren = $('.tab-list').children('li');
+
+                    for (var i = 0, ilen = elChildren.length; i < ilen; i++) {
+                        widthArr.push($('.tab-list').children('li')[i].offsetWidth + 10) // 10是当前span的margin
+                    }
+                    $('.to-left').on('click', function () {
+                        animateTabs('left', $('.tab-list'))
+                    });
+                    $('.to-right').on('click', function () {
+                        animateTabs('right', $('.tab-list'))
+                    });
+
+                    function animateTabs(type, $el) {
+                        var elWidth = $el[0].clientWidth; // 内部菜单的宽度
+                        var wrapWidth = $('.tab-wrap')[0].clientWidth; // 外层包裹的宽度
+                        var canmove = elWidth - wrapWidth; // 可以移动的距离
+                        currleft = $el[0].offsetLeft;// 当前向左偏移的距离
+
+
+                        if (type === 'left') { // 向左
+                            currleft = Math.abs(currleft) + widthArr[handleNum];
+                            $el.stop().animate({left: -currleft + 'px'}, 300, function () {
+                                handleNum++;
+                                if (currleft >= canmove) {
+                                    handleNum = $el.children('li').length - 1;
+                                    $el.stop().animate({left: -canmove + 'px',})
+                                }
+                            })
+                        } else { // 向右
+                            currleft = currleft + widthArr[handleNum];
+                            $el.stop().animate({left: currleft + 'px'}, 300, function () {
+                                handleNum--;
+                                if (currleft >= 0) {
+                                    handleNum = 0;
+                                    $el.stop().animate({left: 0 + 'px'})
+                                }
+                            })
+                        }
+                    }
+                </script>
+            </section>
+        </div>
+    </div>
+    <!-- END 解决方案  -->
+</section>
+{% endblock %}
+
+{% block custom_js %}
+<script src="{% static 'layui/use-layui.js' %}"></script>
+{% endblock %}

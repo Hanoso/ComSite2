@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ product.name }} - 产品详情 - 新材数科有限公司{% endblock %}
+{% block breadcrumb %}
+<span class="layui-breadcrumb" lay-separator=">">
+  <a href="{% url 'index' %}">首页</a>
+  <a href="{% url 'productlist' %}">产品展示</a>
+    <a href="" style="color: #00a971 !important;">{{ product.name }}</a>
+</span>
+{% endblock %}
+
+{% block content %}
+<section id="index-body">
+    <!-- START 产品详情  -->
+    <div class="layui-row product-row">
+        <div class="layui-col-xs6 layui-col-md12">
+            <div class="product-image"></div>
+        </div>
+        <div class="layui-row normal-container">
+            <div class="layui-col-xs6 layui-col-md12 m-bottom40">
+                <div class="product-detail-top">
+                    <ul>
+                        <li>
+                            <img src="{{ MEDIA_URL }}{{ product.picture }}" alt="产品图片"/>
+                        </li>
+                        <li>
+                            <p>{{ product.name }}</p>
+                            <p>{{ product.abstract }}</p>
+                            <div class="product-detail-page">
+                                <ul>
+                                    <li>
+                                        {% if previous_product %}
+                                        <a href="{% url 'product' previous_product.id %}" class="page-link text-truncate">上个：
+                                            {{ previous_product.name }}</a>
+                                        {% else %}
+                                        <a href="#" class="page-link text-truncate">上个：无</a>
+                                        {% endif %}
+                                    </li>
+                                    <li>
+                                        {% if next_product %}
+                                        <a href="{% url 'product' next_product.id %}" class="page-link text-truncate">下个：
+                                            {{ next_product.name }}</a>
+                                        {% else %}
+                                        <a href="#" class="page-link text-truncate">下个：无</a>
+                                        {% endif %}
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="layui-col-xs6 layui-col-md3">
+                <div class="product-detail-sidebar">
+                    <p>为您推荐</p>
+                    <ul>
+                        {% for related_product in related_products %}
+                        <li><a href="{% url 'product' related_product.id %}" class="text-truncate">
+                            {{ related_product.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="layui-col-xs12 layui-col-md9">
+                <div class="product-detail-tab">
+                    <div class="layui-tab">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this">详细信息</li>
+                            <li>规格参数</li>
+                            <li>包装安装</li>
+                        </ul>
+                        <div class="layui-tab-content">
+                            <div class="layui-tab-item layui-show">
+                                {% autoescape off %}
+                                {{ product.detail }}
+                                {% endautoescape %}
+                            </div>
+                            <div class="layui-tab-item package">
+                                {% autoescape off %}
+                                {{ product.parameter }}
+                                {% endautoescape %}
+                            </div>
+                            <div class="layui-tab-item">
+                                {% autoescape off %}
+                                {{ product.package }}
+                                {% endautoescape %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END 产品详情  -->
+</section>
+{% endblock %}
+
+{% block custom_js %}
+<script src="{% static 'layui/use-layui.js' %}"></script>
+{% endblock %}

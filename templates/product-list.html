@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{% if category_id == '' %}产品展示{% else %}{{ category }}{% endif %} - 新材数科有限公司{% endblock %}
+{% block breadcrumb %}
+<span class="layui-breadcrumb" lay-separator=">">
+  <a href="{% url 'index' %}">首页</a>
+  <a href="{% url 'productlist' %}">产品展示</a>
+    <a href="?ct={% if category_id == '' %}{% else %}{{ current_category.id }}{% endif %}" style="color: #00a971 !important;">
+        {% if category_id == '' %}全部{% else %}{{ current_category.name }}{% endif %}
+    </a>
+</span>
+{% endblock %}
+
+{% block content %}
+<section id="index-body">
+    <!-- START 产品列表  -->
+    <div class="layui-row product-row">
+        <div class="layui-col-xs6 layui-col-md12 float-none">
+            <div class="product-image"></div>
+        </div>
+        <div class="layui-col-xs6 layui-col-md12 float-none">
+            <div class="subnav-type">
+                <ul class="subnav-type-ul">
+                    <li>
+                        <a href="?ct=" title="全部" target="_self"
+                           class="link {% ifequal category_id '' %}active2{% endifequal %}">全部</a>
+                    </li>
+                    {% for category in all_categories %}
+                    <li>
+                        <a href="?ct={{ category.id }}" title="{{ category.name }}" target="_self"
+                           class="active link {% ifequal category_id category.id|stringformat:'i' %}active2{% endifequal %}">
+                            {{ category.name }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="layui-col-xs6 layui-col-md12 float-none">
+            <div class="product-container">
+                <h2 class="lh-news-h cuisine">
+                    <b>产品展示</b>
+                    <span></span>
+                </h2>
+                <hr class="layui-bg-gray" style="width: 100%;">
+                <!--产品列表-->
+                <ul class="product-box">
+                    {% for product in all_products.object_list %}
+                    <li class="bg-color-grey2">
+                        <a href="{% url 'product' product.id %}" title="{{ product.name }}">
+                            <div class="product-picture"><img src="{{ MEDIA_URL }}{{ product.picture }}"/></div>
+                            <h2>{{ product.name }}</h2>
+                            <h3>{{ product.abstract }}</h3>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <!-- 分页-->
+                <div class="product-page">
+                    <div id="normal-page">
+                        <ul>
+                            {% if all_products.has_previous %}
+                            <li class="long"><a href="?{{ all_products.previous_page_number.querystring }}">上一页</a></li>
+                            {% endif %}
+                            {% for page in all_products.pages %}
+                            {% if page %}
+                            {% ifequal page all_products.number %}
+                            <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+                            {% else %}
+                            <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                            {% endifequal %}
+                            {% else %}
+                            <li class="none"><a href="">...</a></li>
+                            {% endif %}
+                            {% endfor %}
+                            {% if all_products.has_next %}
+                            <li class="long"><a href="?{{ all_products.next_page_number.querystring }}">下一页</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END 产品列表  -->
+</section>
+{% endblock %}
+
+{% block custom_js %}
+<script src="{% static 'layui/use-layui.js' %}"></script>
+{% endblock %}

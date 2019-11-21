@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}服务支持 - 新材数科有限公司{% endblock %}
+{% block breadcrumb %}
+<span class="layui-breadcrumb" lay-separator=">">
+  <a href="{% url 'index' %}">首页</a>
+  <a href="{% url 'service' %}" style="color: #00a971 !important;">资料下载</a>
+</span>
+{% endblock %}
+
+{% block content %}
+<section id="index-body">
+    <!-- START 服务支持  -->
+    <div class="layui-row service-row">
+        <div class="layui-col-xs6 layui-col-md12 float-none">
+            <div class="service-image"></div>
+        </div>
+        <div class="layui-col-xs6 layui-col-md12 float-none">
+            <div class="service-container">
+                <!--服务手册列表-->
+                <ul class="service-box">
+                    {% for resource in all_rescources.object_list %}
+                    <li>
+                        <div class="service-icon">
+                            <i class="layui-icon layui-icon-file" style="font-size: 30px; color: grey;"></i>
+                        </div>
+                        <div class="service-book">
+                            <a class="btn pull-xs-right" href="{{ MEDIA_URL }}{{ resource.download }}" title="{{ resource.name }}">立即下载</a>
+                            <span class="book">
+                                {{ resource.name }}
+                            </span><br>
+                            <span>{{ resource.add_time|date:'Y-m-d' }}</span>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <!-- 分页-->
+                <div class="product-page">
+                    <div id="normal-page">
+                        <ul>
+                            {% if all_rescources.has_previous %}
+                            <li class="long"><a href="?{{ all_rescources.previous_page_number.querystring }}">上一页</a></li>
+                            {% endif %}
+                            {% for page in all_rescources.pages %}
+                            {% if page %}
+                            {% ifequal page all_rescources.number %}
+                            <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+                            {% else %}
+                            <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                            {% endifequal %}
+                            {% else %}
+                            <li class="none"><a href="">...</a></li>
+                            {% endif %}
+                            {% endfor %}
+                            {% if all_rescources.has_next %}
+                            <li class="long"><a href="?{{ all_rescources.next_page_number.querystring }}">下一页</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END 服务支持  -->
+</section>
+{% endblock %}
+
+{% block custom_js %}
+<script src="{% static 'layui/use-layui.js' %}"></script>
+{% endblock %}

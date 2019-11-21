@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+{% for info in cominfo %}
+{{ info.name }}
+{% endfor %}
+{% endblock %}
+{% block breadcrumb %}{% endblock %}
+
+{% block content %}
+<section id="index-body">
+    <!-- START 轮播图  -->
+    <div class="layui-row banner-row">
+        <div class="layui-col-xs6 layui-col-md12">
+            <div class="banner">
+                <div class="layui-carousel" id="layui-banner">
+                    <div carousel-item="">
+                        {% for banner in all_banners %}
+                        <div><img src="{{ MEDIA_URL }}{{ banner.image }}"></div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END 轮播图  -->
+    <!-- START 解决方案  -->
+    <div class="layui-row solution-row">
+        <div class="layui-col-xs6 layui-col-md12">
+            <div class="solution">
+                <div class="solution-title">解决方案</div>
+                <div class="layui-row layui-col-space5 solution-row">
+                    {% for solution in all_solutions %}
+                    <div class="layui-col-md4 hover-shadow-box-animation">
+                        <div class="solution-item">
+                            <ul>
+                                <li class="img-circle"><img class="layui-circle"
+                                                            src="{{ MEDIA_URL }}{{ solution.picture }}"/></li>
+                                <li class="solution-item-text">
+                                    <a href="{% url 'solution' solution.id %}" title="{{ solution.name }}">
+                                    {{ solution.abstract }}
+                                        </a>
+                                </li>
+                                <li class="solution-more">
+                                    <a href="{% url 'solution' solution.id %}" title="{{ solution.name }}">查看详情>></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END 解决方案  -->
+    <!-- START 产品展示  -->
+    <div class="layui-row product-row">
+        <div class="layui-col-xs6 layui-col-md12">
+            <div class="product-flow">
+                <div class="product-title"><a href="{% url 'productlist' %}">产品展示</a></div>
+                <div class="product-list">
+                    <div class="flow-default" id="LAY_product">
+                        {% for product in all_products %}
+                        <div class="hover-shadow-box-animation product-hover">
+                            <a href="{% url 'product' product.id %}"><img lay-src="{{ MEDIA_URL }}{{ product.picture }}"></a>
+                            <div class="product-index-container">
+                                <a href="{% url 'product' product.id %}">{{ product.name }}</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END 产品展示  -->
+    <!-- START 新闻动态  -->
+    <div class="layui-row news-row">
+        <div class="layui-col-xs6 layui-col-md12">
+            <div class="news">
+                <div class="news-title"><a href="{% url 'newslist' %}">新闻动态</a></div>
+                <div class="news-list">
+                    <div class="layui-row">
+                        {% for article in all_articles %}
+                        <div class="layui-col-md6">
+                            <div class="layui-row">
+                                <div class="layui-col-md4">
+                                    <a href="{% url 'news' article.id  %}"><img src="{{ MEDIA_URL }}{{ article.picture }}"
+                                                                    style="height: 150px; width: 150px;"></a>
+                                </div>
+                                <div class="layui-col-md8 news-box">
+                                    <ul>
+                                        <li class="news-topic truncate-text"><a href="{% url 'news' article.id %}" title="{{ article.title }}">{{ article.title }}</a></li>
+                                        <li class="news-date">{{ article.add_time|date:'Y-m-d' }}</li>
+                                        <li class="news-content truncate-text-multiline">
+                                            {{ article.abstract }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END 新闻动态  -->
+</section>
+{% endblock %}
+{% block footer_comname %}
+{% for info in cominfo %}
+{{ info.name }}
+{% endfor %}
+{% endblock %}
+{% block custom_js %}
+<script src="{% static 'layui/use-layui.js' %}"></script>
+{% endblock %}
