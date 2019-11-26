@@ -17,6 +17,7 @@ import sys
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 
 # Quick-start development settings - unsuitable for production
@@ -42,9 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'DjangoUeditor',
-    'mainsite',
+    # 'mainsite',
     'pure_pagination',
     'captcha',
+    'cominfo',
+    'product',
+    'news',
+    'custom'
     # 'django_mysql'
 ]
 
@@ -88,7 +93,7 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'comsite',
+        'NAME': 'comsite2',
         'USER': 'hanoso',
         'PASSWORD': 'Hwmysql2020',
         'HOST': 'localhost',

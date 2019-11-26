@@ -79,6 +79,12 @@
 </section>
 {% endblock %}
 
+{% block footer_comname %}
+{% for info in cominfo %}
+{{ info.name }}
+{% endfor %}
+{% endblock %}
+
 {% block custom_js %}
 <script src="{% static 'layui/use-layui.js' %}"></script>
 {% endblock %}

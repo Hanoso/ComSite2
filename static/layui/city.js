@@ -2,10 +2,10 @@ var tagData = [{"id":12,"name":"长者","status":0},{"id":13,"name":"工厂"},{"
 var catData = [{"id":1,"name":"周边旅游","children":[{"id":24,"name":"广东","status":0,"children":[{"id":7,"name":"广州"},{"id":23,"name":"潮州"}]}]},{"id":5,"name":"国内旅游","children":[{"id":8,"name":"华北地区","children":[{"id":9,"name":"北京"}]}]},{"id":6,"name":"出境旅游","children":[{"id":10,"name":"东南亚","children":[{"id":11,"name":"马来西亚","children":[{"id":20,"name":"沙巴","children":[{"id":21,"name":"美人鱼岛","children":[{"id":22,"name":"潜水"}]}]}]}]}]}];
 
   layui.config({
-    base : './'
+    base : ''
   }).extend({
-    selectN: '../static/layui_extends/selectN',
-    selectM: '../static/layui_extends/selectM',
+    selectN: '/static/layui/selectN',
+    selectM: '/static/layui/selectM',
   }).use(['layer','form','jquery','selectN','selectM'],function() {
       $ = layui.jquery;
       var form = layui.form
@@ -19,7 +19,7 @@ var catData = [{"id":1,"name":"周边旅游","children":[{"id":24,"name":"广东
           elem: '#cat_ids1'
           , search: [false, true]
           //候选数据【必填】
-          , data: '../static/layui/citydata.json'
+          , data: '/static/layui/citydata.json'
           , name: 'procity'
           , verify: 'required'
       });

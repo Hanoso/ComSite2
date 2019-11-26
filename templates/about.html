@@ -28,7 +28,7 @@
                     <!--                    公司介绍tab-->
                     <div class="layui-tab-item layui-show">
                         {% autoescape off %}
-                        {{ intro.content }}
+                        {{ intro.comintro }}
                         {% endautoescape %}
                     </div>
                     <!--                    发展历程tab-->
@@ -53,6 +53,11 @@
     </div>
     <!-- END 解决方案  -->
 </section>
+{% endblock %}
+{% block footer_comname %}
+{% for info in cominfo %}
+{{ info.name }}
+{% endfor %}
 {% endblock %}
 
 {% block custom_js %}

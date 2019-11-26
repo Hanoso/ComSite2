@@ -23,15 +23,15 @@
             <div class="header-nav">
                 <ul class="layui-nav">
                     <li class="layui-nav-item {% if request.path == '/' %}layui-this{% endif %} "><a href="{% url 'index' %}">首页</a></li>
-                    <li class="layui-nav-item {% if request.path|slice:'6' == '/about' %}layui-this{% endif %}">
+                    <li class="layui-nav-item {% if request.path == '/info/about/' %}layui-this{% endif %}">
                         <a href="{% url 'about' %}">关于我们</a>
                     </li>
-                    <li class="layui-nav-item {% if request.path|slice:'12' == '/productlist' %}layui-this{% endif %}">
+                    <li class="layui-nav-item {% if request.path == '/product/productlist/' %}layui-this{% endif %}">
                         <a href="{% url 'productlist' %}">产品展示</a>
                     </li>
-                    <li class="layui-nav-item {% if request.path|slice:'8' == '/service' %}layui-this{% endif %}"><a href="{% url 'service' %}">服务支持</a></li>
-                    <li class="layui-nav-item {% if request.path|slice:'9' == '/newslist' %}layui-this{% endif %}"><a href="{% url 'newslist' %}">新闻动态</a></li>
-                    <li class="layui-nav-item {% if request.path|slice:'5' == '/link' %}layui-this{% endif %}"><a href="{% url 'link' %}">联系我们</a></li>
+                    <li class="layui-nav-item {% if request.path == '/product/service/' %}layui-this{% endif %}"><a href="{% url 'service' %}">服务支持</a></li>
+                    <li class="layui-nav-item {% if request.path == '/news/newslist/' %}layui-this{% endif %}"><a href="{% url 'newslist' %}">新闻动态</a></li>
+                    <li class="layui-nav-item {% if request.path == '/custom/link/' %}layui-this{% endif %}"><a href="{% url 'link' %}">联系我们</a></li>
                     <li class="layui-nav-item"><a href="#">English</a></li>
                 </ul>
             </div>

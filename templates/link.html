@@ -146,7 +146,7 @@
 <script type="text/javascript">
     //验证码动态刷新实现
     $('.captcha').click(function () {
-        $.getJSON("/captcha/refresh/", function (result) {
+        $.getJSON("/custom/captcha/refresh/", function (result) {
             $('#id_captcha').attr('src', result['image_url']);
             $('#id_captcha_0').val(result['key'])
         });

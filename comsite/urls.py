@@ -20,9 +20,9 @@ from django.views.static import serve
 from DjangoUeditor import urls as DjangoUeditor_urls
 
 from .settings import MEDIA_ROOT
-from mainsite.views import IndexView, AboutView, ProductListView, ServiceListView, LinkView, SolutionView, ArticleListView
-from mainsite.views import ProductView, ArticleView
-
+# from mainsite.views import IndexView, AboutView, ProductListView, ServiceListView, LinkView, SolutionView, ArticleListView
+# from mainsite.views import ProductView, ArticleView
+from cominfo.views import IndexView
 admin.site.site_title = '网站后台'
 # admin.site.site_header = '员工管理后台'
 
@@ -34,23 +34,26 @@ urlpatterns = [
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
     # 配置富文本编辑器路径
     re_path(r'^ueditor/', include(DjangoUeditor_urls)),
-    
-    # path('mainsite/', include('mainsite.urls')),
-    # path('', TemplateView.as_view(template_name='index.html')),
+
     path('', IndexView.as_view(), name='index'),
-    path('about/', AboutView.as_view(), name='about'),
+
+    # path('about/', AboutView.as_view(), name='about'),
+    path('info/', include('cominfo.urls')),
+    path('product/', include('product.urls')),
+    path('news/', include('news.urls')),
+    path('custom/', include('custom.urls')),
     
-    path('productlist/', ProductListView.as_view(), name='productlist'),
-    re_path('product/(?P<product_id>\d+)$', ProductView.as_view(), name='product'),
+    # path('productlist/', ProductListView.as_view(), name='productlist'),
+    # re_path('product/(?P<product_id>\d+)$', ProductView.as_view(), name='product'),
+    #
+    # path('service/', ServiceListView.as_view(), name='service'),
+    #
+    # path('newslist/', ArticleListView.as_view(), name='newslist'),
+    # re_path('news/(?P<article_id>\d+)$', ArticleView.as_view(), name='news'),
     
-    path('service/', ServiceListView.as_view(), name='service'),
+    # path('link/', LinkView.as_view(), name='link'),
+    # path('captcha/', include('captcha.urls')),  # 图片验证码 路由
+    # path('refresh_captcha/', LinkView.refresh_captcha),  # 刷新验证码，ajax
     
-    path('newslist/', ArticleListView.as_view(), name='newslist'),
-    re_path('news/(?P<article_id>\d+)$', ArticleView.as_view(), name='news'),
-    
-    path('link/', LinkView.as_view(), name='link'),
-    path('captcha/', include('captcha.urls')),  # 图片验证码 路由
-    path('refresh_captcha/', LinkView.refresh_captcha),  # 刷新验证码，ajax
-    
-    re_path('solution/(?P<solution_id>\d+)$', SolutionView.as_view(), name='solution'),
+    # re_path('solution/(?P<solution_id>\d+)$', SolutionView.as_view(), name='solution'),
 ]
